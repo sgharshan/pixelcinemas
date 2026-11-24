@@ -1,0 +1,27 @@
+{
+  "name": "pixel-cinemas-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "test": "node --experimental-vm-modules ../node_modules/jest/bin/jest.js --runInBand",
+    "lint": "eslint .",
+    "build": "node --check src/server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">Pixel Cinemas</title>
+  <rect width="48" height="48" rx="9" fill="#f2a51a"/>
+  <path d="M10 10h11v11H10zm0 17h11v11H10zm17-17h11v11H27zm0 17h5v5h-5zm6 6h5v5h-5z" fill="#070707"/>
+  <path d="m23 24 12-7v14z" fill="#fff4dc"/>
+</svg>

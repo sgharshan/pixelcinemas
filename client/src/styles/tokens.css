@@ -1,0 +1,20 @@
+:root {
+  color-scheme: dark;
+  --ink-black: #070707;
+  --screen-black: #101010;
+  --velvet-charcoal: #1a1a19;
+  --projector-amber: #f2a51a;
+  --ticket-cream: #fff4dc;
+  --signal-cyan: #7dd9dc;
+  --muted-silver: #a8a49c;
+  --focus-ring: #fff4dc;
+  --font-display: "Bahnschrift Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Segoe UI Variable", "Segoe UI", sans-serif;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --content-width: 90rem;
+}
