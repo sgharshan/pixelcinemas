@@ -1,0 +1,17 @@
+import 'dotenv/config'; import bcrypt from 'bcrypt'; import { pathToFileURL } from 'node:url'; import { connectDatabase, disconnectDatabase } from '../server/src/config/database.js'; import { Movie } from '../server/src/models/Movie.js'; import { Screening } from '../server/src/models/Screening.js'; import { User } from '../server/src/models/User.js'; import { generateSeatLayout } from '../server/src/seats/layout.js';
+const movies = [
+  { title: 'Signal at Midnight', synopsis: 'A projectionist discovers a coded warning hidden between the final frames of a forgotten thriller.', genre: ['Thriller', 'Mystery'], durationMinutes: 118, ageRating: '15', posterUrl: '/posters/signal-at-midnight.svg', backdropUrl: '/backdrops/signal-at-midnight.svg', releaseDate: '2026-12-04', status: 'now-showing' },
+  { title: 'Little Orbit', synopsis: 'Two siblings and a stubborn repair robot race across the moon to bring their family safely home.', genre: ['Family', 'Adventure'], durationMinutes: 102, ageRating: 'PG', posterUrl: '/posters/little-orbit.svg', backdropUrl: '/backdrops/little-orbit.svg', releaseDate: '2026-11-20', status: 'now-showing' },
+  { title: 'The Last Lantern', synopsis: 'A coastal cartographer follows a mysterious light toward a town erased from every modern map.', genre: ['Drama', 'Fantasy'], durationMinutes: 126, ageRating: '12A', posterUrl: '/posters/last-lantern.svg', backdropUrl: '/backdrops/last-lantern.svg', releaseDate: '2027-01-15', status: 'coming-soon' },
+];
+const showtimes = ['2027-12-20T15:00:00.000Z', '2027-12-20T19:30:00.000Z', '2027-12-21T14:00:00.000Z'];
+export async function seedDatabase({ adminPassword = process.env.SEED_ADMIN_PASSWORD ?? 'ChangeMe123!' } = {}) {
+  const passwordHash = await bcrypt.hash(adminPassword, 12); await User.findOneAndUpdate({ email: 'admin@pixelcinemas.local' }, { name: 'Pixel Administrator', email: 'admin@pixelcinemas.local', passwordHash, role: 'admin' }, { upsert: true, returnDocument: 'after', setDefaultsOnInsert: true });
+  const seeded = [];
+  for (const movie of movies) seeded.push(await Movie.findOneAndUpdate({ title: movie.title }, movie, { upsert: true, returnDocument: 'after', setDefaultsOnInsert: true }));
+  const bookableMovies = seeded.slice(0, 2); let index = 0;
+  for (const movie of bookableMovies) for (const startsAt of showtimes) { index += 1; const auditoriumName = `Screen ${index % 2 ? 'One' : 'Two'}`; await Screening.findOneAndUpdate({ movie: movie.id, startsAt: new Date(startsAt), auditoriumName }, { movie: movie.id, startsAt: new Date(startsAt), auditoriumName, status: 'scheduled', seatLayout: generateSeatLayout({ rows: ['A', 'B', 'C', 'D', 'E', 'F'], seatsPerRow: 10, premiumRows: ['D', 'E'], reclinerRows: ['F'], accessibleSeats: ['F-1', 'F-10'] }), prices: { standard: 9.99, premium: 14.99, recliner: 18.99 } }, { upsert: true, returnDocument: 'after', setDefaultsOnInsert: true }); }
+  return { users: await User.countDocuments(), movies: await Movie.countDocuments(), screenings: await Screening.countDocuments() };
+}
+async function main() { const uri = process.env.MONGODB_URI ?? 'mongodb://localhost:27017/pixel-cinemas'; await connectDatabase(uri); const result = await seedDatabase(); console.log(`Seed complete: ${result.movies} movies, ${result.screenings} screenings`); await disconnectDatabase(); }
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main().catch((error) => { console.error(error); process.exitCode = 1; });

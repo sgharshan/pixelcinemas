@@ -1,0 +1,26 @@
+services:
+  mongo:
+    image: mongo:8.0
+    restart: unless-stopped
+    volumes: [pixel-mongo:/data/db]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+  server:
+    build: { context: ., dockerfile: server/Dockerfile }
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo:27017/pixel-cinemas
+      JWT_SECRET: ${JWT_SECRET:-development-container-secret-change-me}
+      CLIENT_ORIGIN: http://localhost:8080
+      SEAT_HOLD_SECONDS: 300
+    ports: ["3000:3000"]
+    depends_on: { mongo: { condition: service_healthy } }
+  client:
+    build: { context: ., dockerfile: client/Dockerfile }
+    ports: ["8080:8080"]
+    depends_on: { server: { condition: service_healthy } }
+volumes:
+  pixel-mongo:
