@@ -5,6 +5,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { notFound } from './middleware/notFound.js';
 import { authRouter } from './modules/auth/auth.routes.js';
 import { movieRouter } from './modules/movies/movie.routes.js';
+import { screeningRouter } from './modules/screenings/screening.routes.js';
 
 export function createApp({
   jwtSecret = 'development-only-secret-change-before-deploy',
@@ -23,6 +24,7 @@ export function createApp({
 
   app.use('/api/auth', authRouter);
   app.use('/api/movies', movieRouter);
+  app.use('/api/screenings', screeningRouter);
 
   app.use(notFound);
   app.use(errorHandler);

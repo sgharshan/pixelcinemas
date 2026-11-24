@@ -6,6 +6,8 @@ import { LoginPage } from '../pages/LoginPage.jsx';
 import { MovieDetailsPage } from '../pages/MovieDetailsPage.jsx';
 import { MoviesPage } from '../pages/MoviesPage.jsx';
 import { RegisterPage } from '../pages/RegisterPage.jsx';
+import { ScreeningsPage } from '../pages/ScreeningsPage.jsx';
+import '../styles/seats.css';
 
 export function App() {
   return (
@@ -27,6 +29,7 @@ export function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />
           <Route path="/movies/:id" element={<MovieDetailsPage />} />
+          <Route path="/screenings" element={<ScreeningsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>

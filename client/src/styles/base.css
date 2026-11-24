@@ -17,6 +17,13 @@ a {
   color: inherit;
 }
 
+.button { align-items: center; border: 1px solid #746f65; color: inherit; cursor: pointer; display: inline-flex; font-weight: 700; justify-content: center; letter-spacing: .06em; min-height: 3rem; padding: .8rem 1.2rem; text-decoration: none; text-transform: uppercase; }
+.button--amber { background: var(--projector-amber); border-color: var(--projector-amber); color: #171614; }
+.button[aria-disabled="true"], .button:disabled { cursor: not-allowed; opacity: .45; }
+.content-page { margin: 0 auto; max-width: var(--content-width); min-height: 70vh; padding: clamp(3rem, 8vw, 7rem) clamp(1rem, 4vw, 4rem); }
+.content-page h1 { font: 700 clamp(3rem, 8vw, 6rem)/.95 var(--font-display); margin: .2em 0 .7em; }.eyebrow { color: var(--projector-amber); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.quick-book { align-items: end; background: #f5f2ea; color: #171614; display: grid; gap: 1rem; grid-template-columns: 1.2fr repeat(3, 1fr) auto; padding: 1.5rem clamp(1rem, 4vw, 4rem); }.quick-book h2 { margin: .2rem 0; }.quick-book label { display: grid; font-size: .75rem; font-weight: 700; gap: .4rem; letter-spacing: .08em; text-transform: uppercase; }.quick-book select, .admin-form input, .admin-form select { background: transparent; border: 0; border-bottom: 1px solid #aaa; font: inherit; min-height: 2.7rem; }.screening-list { display: grid; gap: 1rem; }.screening-card { align-items: center; border: 1px solid #393630; display: flex; justify-content: space-between; padding: 1.5rem 2rem; }.screening-card h2 { font-size: 2rem; margin: .2rem 0; }.admin-form { display: grid; gap: 1rem; max-width: 45rem; }.admin-form label { display: grid; gap: .4rem; }.admin-form fieldset { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }.field-error { color: #ff8670; }
+
 :focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
@@ -89,6 +96,7 @@ a {
     justify-content: flex-start;
     overflow-x: auto;
   }
+  .quick-book { align-items: stretch; grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

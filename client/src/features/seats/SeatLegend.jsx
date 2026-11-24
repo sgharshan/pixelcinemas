@@ -1,0 +1,1 @@
+export function SeatLegend() { return <ul className="seat-legend" aria-label="Seat legend"><li><i className="seat seat--available" />Available</li><li><i className="seat seat--selected" />Selected</li><li><i className="seat seat--held" />Unavailable</li><li>♿ Accessible</li></ul>; }

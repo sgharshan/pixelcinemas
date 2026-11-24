@@ -1,0 +1,3 @@
+import PropTypes from 'prop-types';
+export function SeatSummary({ seats, total, onContinue, disabled = false }) { return <aside className="seat-summary"><p className="eyebrow">Your selection</p><h2>{seats.length ? seats.map((seat) => seat.id).join(', ') : 'No seats yet'}</h2><p>{seats.length} {seats.length === 1 ? 'seat' : 'seats'}</p><strong>£{total.toFixed(2)}</strong><button className="button button--amber" type="button" disabled={disabled || !seats.length} onClick={onContinue}>Continue to checkout</button></aside>; }
+SeatSummary.propTypes = { seats: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired })).isRequired, total: PropTypes.number.isRequired, onContinue: PropTypes.func.isRequired, disabled: PropTypes.bool };

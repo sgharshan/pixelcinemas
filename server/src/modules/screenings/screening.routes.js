@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import { authenticate } from '../../middleware/authenticate.js';
+import { authorize } from '../../middleware/authorize.js';
+import { validate } from '../../middleware/validate.js';
+import { cancel, create, detail, list, update } from './screening.controller.js';
+import { createScreeningSchema, screeningQuerySchema, updateScreeningSchema } from './screening.schemas.js';
+export const screeningRouter = Router();
+screeningRouter.get('/', validate(screeningQuerySchema, 'query'), list);
+screeningRouter.get('/:id', detail);
+screeningRouter.post('/', authenticate, authorize('admin'), validate(createScreeningSchema), create);
+screeningRouter.patch('/:id', authenticate, authorize('admin'), validate(updateScreeningSchema), update);
+screeningRouter.delete('/:id', authenticate, authorize('admin'), cancel);

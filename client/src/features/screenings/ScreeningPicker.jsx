@@ -1,0 +1,4 @@
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+export function ScreeningPicker({ screenings }) { return <div className="screening-list">{screenings.map((screening) => <article key={screening.id} className="screening-card"><div><p>{new Date(screening.startsAt).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}</p><h2>{new Date(screening.startsAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</h2><span>{screening.auditoriumName}</span></div><Link className="button" to={`/screenings/${screening.id}/seats`}>Select seats</Link></article>)}</div>; }
+ScreeningPicker.propTypes = { screenings: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired, startsAt: PropTypes.string.isRequired, auditoriumName: PropTypes.string.isRequired })).isRequired };
