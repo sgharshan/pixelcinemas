@@ -1,0 +1,17 @@
+.worktrees/
+.superpowers/
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.env
+.env.*
+!.env.example
+tmp/
+.uv-cache/
+.uv-python/
+BRIEF AND MATERIALS/
+*.log
+Thumbs.db
+.DS_Store
