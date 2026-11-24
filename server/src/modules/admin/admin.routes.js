@@ -1,0 +1,1 @@
+import { Router } from 'express'; import { authenticate } from '../../middleware/authenticate.js'; import { authorize } from '../../middleware/authorize.js'; import { stats } from './admin.controller.js'; export const adminRouter = Router(); adminRouter.use(authenticate, authorize('admin')); adminRouter.get('/stats', stats);

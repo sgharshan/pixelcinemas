@@ -1,7 +1,12 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { screeningsApi } from '../api/screenings.js';
+import { QuickBook } from '../features/screenings/QuickBook.jsx';
 import '../styles/movies.css';
 
 export function HomePage() {
+  const [screenings, setScreenings] = useState([]);
+  useEffect(() => { const controller = new AbortController(); screeningsApi.list({ status: 'scheduled' }, controller.signal).then((data) => setScreenings(data.screenings), () => {}); return () => controller.abort(); }, []);
   return (
     <main>
       <section className="cinema-hero">
@@ -13,6 +18,7 @@ export function HomePage() {
           <Link className="hero-action" to="/movies">Find a film</Link>
         </div>
       </section>
+      <QuickBook screenings={screenings} />
     </main>
   );
 }

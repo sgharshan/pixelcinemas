@@ -1,0 +1,4 @@
+import { Link } from 'react-router-dom';
+import logoMark from '../assets/pixel-cinemas-mark.svg';
+import { useAuth } from '../features/auth/auth-context.js';
+export function SiteHeader() { const { user, logout } = useAuth(); return <header className="site-header"><Link className="brand" to="/" aria-label="Pixel Cinemas home"><img src={logoMark} alt="" width="42" height="42" /><span>Pixel Cinemas</span></Link><nav className="primary-navigation" aria-label="Primary navigation"><Link to="/movies">Films</Link><Link to="/movies?status=coming-soon">Coming soon</Link><Link to="/bookings">My bookings</Link>{user?.role === 'admin' && <Link to="/admin">Admin</Link>}</nav>{user ? <button className="account-link account-button" onClick={logout}>Sign out <span>{user.name}</span></button> : <Link className="account-link" to="/login">Sign in</Link>}</header>; }

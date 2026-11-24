@@ -1,0 +1,1 @@
+import { useRouteError } from 'react-router-dom'; import { ErrorState } from '../components/ErrorState.jsx'; export function ErrorPage() { const error = useRouteError(); return <main><ErrorState message={error?.message ?? 'An unexpected error occurred'} /></main>; }

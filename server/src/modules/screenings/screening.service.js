@@ -40,7 +40,7 @@ export async function updateScreening(id, data) {
   const update = { ...data };
   if (update.movieId) { update.movie = update.movieId; delete update.movieId; }
   if (update.layoutConfig) { update.seatLayout = generateSeatLayout(update.layoutConfig); delete update.layoutConfig; }
-  const screening = await Screening.findByIdAndUpdate(id, update, { new: true, runValidators: true });
+  const screening = await Screening.findByIdAndUpdate(id, update, { returnDocument: 'after', runValidators: true });
   if (!screening) throw new AppError('SCREENING_NOT_FOUND', 'Screening not found', 404);
   return screening;
 }

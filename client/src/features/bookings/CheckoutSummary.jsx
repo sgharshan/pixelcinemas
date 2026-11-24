@@ -1,0 +1,8 @@
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+export function CheckoutSummary({ screening, seats, total, expiresAt, onConfirm, busy = false }) {
+  const [remaining, setRemaining] = useState(1);
+  useEffect(() => { const timer = setInterval(() => setRemaining(Math.max(0, expiresAt - Date.now())), 1000); return () => clearInterval(timer); }, [expiresAt]);
+  return <section className="checkout-card"><p className="eyebrow">Review and confirm</p><h1>{screening.movie.title}</h1><p>{new Date(screening.startsAt).toLocaleString('en-GB')} · {screening.auditoriumName}</p><ul>{seats.map((seat) => <li key={seat.id}><span>{seat.id} · {seat.type}</span><strong>£{seat.price.toFixed(2)}</strong></li>)}</ul><div className="checkout-total"><span>Total</span><strong>£{total.toFixed(2)}</strong></div><p role="status">Hold expires in {Math.ceil(remaining / 1000)} seconds</p><button className="button button--amber" type="button" disabled={!remaining || busy} onClick={onConfirm}>{busy ? 'Confirming…' : 'Confirm booking'}</button><p className="small-print">This assessment demo does not collect or process card details.</p></section>;
+}
+CheckoutSummary.propTypes = { screening: PropTypes.shape({ movie: PropTypes.shape({ title: PropTypes.string.isRequired }).isRequired, startsAt: PropTypes.string.isRequired, auditoriumName: PropTypes.string.isRequired }).isRequired, seats: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired, type: PropTypes.string.isRequired, price: PropTypes.number.isRequired })).isRequired, total: PropTypes.number.isRequired, expiresAt: PropTypes.number.isRequired, onConfirm: PropTypes.func.isRequired, busy: PropTypes.bool };

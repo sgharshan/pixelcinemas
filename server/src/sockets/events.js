@@ -1,0 +1,1 @@
+export const seatEvents = Object.freeze({ JOIN: 'screening:join', HOLD: 'seat:hold', HELD: 'seat:held', RELEASE: 'seat:release', RELEASED: 'seat:released', BOOKED: 'seat:booked', STATE: 'seat:state' });

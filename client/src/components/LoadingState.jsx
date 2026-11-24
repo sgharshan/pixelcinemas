@@ -1,0 +1,1 @@
+import PropTypes from 'prop-types'; export function LoadingState({ children = 'Loading…' }) { return <div className="catalogue-state" role="status"><span className="loader" aria-hidden="true" />{children}</div>; } LoadingState.propTypes = { children: PropTypes.node };

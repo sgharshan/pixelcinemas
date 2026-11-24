@@ -1,0 +1,1 @@
+import { AdminDashboard } from '../features/admin/AdminDashboard.jsx'; import { useAuth } from '../features/auth/auth-context.js'; export function AdminDashboardPage() { const { token } = useAuth(); return <main className="content-page admin-page"><p className="eyebrow">Operations</p><h1>Cinema control</h1><AdminDashboard token={token} /></main>; }

@@ -1,13 +1,23 @@
 import 'dotenv/config';
+import { createServer } from 'node:http';
+import { Server } from 'socket.io';
 import { createApp } from './app.js';
 import { connectDatabase, disconnectDatabase } from './config/database.js';
 import { getEnvironment } from './config/env.js';
 
-const { port, mongoUri, jwtSecret, clientOrigin } = getEnvironment();
+import { SeatHoldService } from './seats/SeatHoldService.js';
+import { registerSeatHandlers } from './sockets/registerSeatHandlers.js';
+
+const { port, mongoUri, jwtSecret, clientOrigin, seatHoldSeconds } = getEnvironment();
 const app = createApp({ jwtSecret, clientOrigin });
+const httpServer = createServer(app);
+const io = new Server(httpServer, { cors: { origin: clientOrigin } });
+const runtimeHoldService = registerSeatHandlers(io, new SeatHoldService({ ttlMs: seatHoldSeconds * 1000 }));
+app.locals.io = io;
+app.locals.seatHoldService = runtimeHoldService;
 
 await connectDatabase(mongoUri);
-const server = app.listen(port, () => {
+const server = httpServer.listen(port, () => {
   console.log(`Pixel Cinemas API listening on port ${port}`);
 });
 
