@@ -1,0 +1,232 @@
+.cinema-hero {
+  background: var(--screen-black);
+  display: grid;
+  min-height: calc(100vh - 5.25rem);
+  overflow: hidden;
+  position: relative;
+}
+
+.cinema-hero__frame {
+  align-items: end;
+  background:
+    radial-gradient(circle at 72% 20%, rgba(242, 165, 26, 0.34), transparent 26%),
+    linear-gradient(135deg, #12100d 0%, #2b1c0f 48%, #080808 100%);
+  display: flex;
+  gap: 2vw;
+  grid-area: 1 / 1;
+  justify-content: flex-end;
+  padding: 0 7vw;
+  transform: perspective(60rem) rotateY(-3deg);
+}
+
+.cinema-hero__frame span {
+  background: linear-gradient(#7a1b18, #210606);
+  border-radius: 48% 48% 0 0;
+  box-shadow: 0 0 2rem #b02b1b66;
+  height: 36%;
+  width: 13%;
+}
+
+.cinema-hero__copy {
+  align-self: center;
+  background: linear-gradient(90deg, rgba(7, 7, 7, 0.97) 0 43%, rgba(7, 7, 7, 0.15));
+  grid-area: 1 / 1;
+  max-width: 70rem;
+  padding: clamp(3rem, 8vw, 8rem) clamp(1rem, 7vw, 7rem);
+  position: relative;
+  z-index: 1;
+}
+
+.cinema-hero__copy > p:first-child,
+.page-heading > p {
+  color: var(--projector-amber);
+}
+
+.cinema-hero h1,
+.page-heading h1,
+.movie-detail h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.9;
+  margin: 0.25em 0;
+  max-width: 10ch;
+}
+
+.cinema-hero__copy > p:not(:first-child) {
+  color: #d8d2c7;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  max-width: 40rem;
+}
+
+.hero-action {
+  background: var(--projector-amber);
+  color: var(--ink-black);
+  display: inline-block;
+  font-weight: 750;
+  margin-top: var(--space-4);
+  padding: 0.9rem 1.4rem;
+  text-decoration: none;
+}
+
+.catalogue-page {
+  margin: 0 auto;
+  max-width: var(--content-width);
+  padding: clamp(2rem, 6vw, 6rem) clamp(1rem, 4vw, 4rem);
+}
+
+.page-heading h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  max-width: none;
+}
+
+.movie-filters,
+.movie-form {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: minmax(12rem, 2fr) repeat(2, minmax(10rem, 1fr));
+  margin: var(--space-8) 0;
+}
+
+.movie-filters input,
+.movie-filters select,
+.movie-form input,
+.movie-form select,
+.movie-form textarea {
+  background: var(--screen-black);
+  border: 1px solid #555149;
+  color: var(--ticket-cream);
+  font: inherit;
+  min-height: 3rem;
+  padding: 0.7rem;
+}
+
+.movie-grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 2.2rem);
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.movie-card {
+  background: #141413;
+  border-bottom: 3px solid transparent;
+  display: grid;
+}
+
+.movie-card:hover {
+  border-bottom-color: var(--projector-amber);
+}
+
+.movie-card__poster {
+  aspect-ratio: 2 / 3;
+  background: linear-gradient(145deg, #37210f, #111);
+  overflow: hidden;
+  position: relative;
+}
+
+.movie-card__poster img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.rating-badge {
+  background: var(--ticket-cream);
+  border-radius: 50%;
+  bottom: 0.75rem;
+  color: var(--ink-black);
+  display: grid;
+  font-weight: 800;
+  height: 2.5rem;
+  place-items: center;
+  position: absolute;
+  right: 0.75rem;
+  width: 2.5rem;
+}
+
+.movie-card__body {
+  padding: var(--space-4);
+}
+
+.movie-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.movie-card p {
+  color: var(--muted-silver);
+}
+
+.movie-card a {
+  color: var(--projector-amber);
+  font-weight: 700;
+}
+
+.catalogue-state {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.catalogue-state--error {
+  color: #ffb3a6;
+}
+
+.movie-form {
+  grid-template-columns: repeat(2, minmax(12rem, 1fr));
+}
+
+.movie-form__wide {
+  grid-column: 1 / -1;
+}
+
+.movie-form textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.movie-detail {
+  min-height: calc(100vh - 5.25rem);
+  position: relative;
+}
+
+.movie-detail__backdrop {
+  height: 55vh;
+  inset: 0 0 auto;
+  object-fit: cover;
+  opacity: 0.32;
+  position: absolute;
+  width: 100%;
+}
+
+.movie-detail__content {
+  align-items: end;
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(12rem, 20rem) 1fr;
+  margin: 0 auto;
+  max-width: var(--content-width);
+  padding: clamp(5rem, 18vw, 14rem) clamp(1rem, 5vw, 5rem) 5rem;
+  position: relative;
+}
+
+.movie-detail__content > img {
+  box-shadow: 0 1.5rem 4rem #0009;
+  width: 100%;
+}
+
+@media (max-width: 48rem) {
+  .movie-filters,
+  .movie-form,
+  .movie-detail__content {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-form__wide {
+    grid-column: auto;
+  }
+
+  .movie-detail__content > img {
+    max-width: 13rem;
+  }
+}
