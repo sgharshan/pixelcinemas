@@ -3,8 +3,8 @@ import { createApp } from './app.js';
 import { connectDatabase, disconnectDatabase } from './config/database.js';
 import { getEnvironment } from './config/env.js';
 
-const { port, mongoUri } = getEnvironment();
-const app = createApp();
+const { port, mongoUri, jwtSecret, clientOrigin } = getEnvironment();
+const app = createApp({ jwtSecret, clientOrigin });
 
 await connectDatabase(mongoUri);
 const server = app.listen(port, () => {
