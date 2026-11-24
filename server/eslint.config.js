@@ -11,5 +11,8 @@ export default [
       sourceType: 'module',
       globals: { ...globals.node, ...globals.jest },
     },
+    rules: {
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
   },
 ];

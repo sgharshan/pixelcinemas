@@ -11,7 +11,10 @@
     "build": "node --check src/server.js"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^18.0.10",
+    "express": "^5.1.0",
+    "mongoose": "^9.13.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "eslint": "^9.39.1",
